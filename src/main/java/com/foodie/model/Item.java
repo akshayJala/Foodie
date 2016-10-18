@@ -11,14 +11,26 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-@Table(name="Item1")
+@Table(name="Item")
 @Component
 public class Item {
 	
 	@Id
-	private String id;
-	private String name;
-	private String price;
+	private String ItemId;
+	private String ItemName;
+	public String getItemId() {
+		return ItemId;
+	}
+	public void setItemId(String itemId) {
+		ItemId = itemId;
+	}
+	public String getItemName() {
+		return ItemName;
+	}
+	public void setItemName(String itemName) {
+		ItemName = itemName;
+	}
+	private int price;
 	private String description;
 	private String category_id;
 	private String supplier_id;
@@ -50,22 +62,11 @@ public class Item {
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPrice() {
+
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getDescription() {

@@ -77,14 +77,14 @@
      <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-     </li> <a class="navbar-brand" href="#"><strong>Foodiee</strong></a></li>
+     </li> <a class="navbar-brand" href="Home"><strong>Foodie</strong></a></li>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="Home">Home</a></li>
-        <li><a href="About.jsp">Know Us</a></li>
-        <li><a href="#">Contact Us</a></li>
-		<li><a href="Login">Order Your Meal</a></li>
+        <li><a href="About">Know Us</a></li>
+        <li><a href="Contact">Contact Us</a></li>
+		<li><a href="Order">Order Your Meal</a></li>
 		
 		
 </div>

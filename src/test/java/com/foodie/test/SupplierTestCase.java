@@ -36,8 +36,8 @@ public class SupplierTestCase {
 	}
 	@Test
 	public void createSupplier(){
-		supplier.setId("1002");
-		supplier.setName("vegetrn");
+		supplier.setSupplierId("1002");
+		supplier.setSupplierName("vegetrn");
 		supplier.setAddress("nagole");
 		Assert.assertEquals("suplier testcase",true,supplierDAO.saveOrUpdate(supplier));
 	}

@@ -9,14 +9,14 @@ public interface CategoryDAO {
 	//CRUD operations
 	public boolean save(Category category);
 	public boolean update(Category category);
-	public boolean delete(String id);
+	public boolean delete(String CategoryId);
 	public boolean saveOrUpdate(Category category);
 	
-	//based on the id, it will return category domain
-	public Category get(String id);
+	//based on the CategoryId, it will return category domain
+	public Category get(String CategoryId);
 	
 	//To get all the categories
 	public List<Category>list();
-	
+	public Category getByName(String CategoryName);
 	
 }

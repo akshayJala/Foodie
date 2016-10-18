@@ -37,8 +37,8 @@ public class CategoryTestCase {
 	}
 	@Test
 public void createCategory(){
-	category.setId("Food13");
-	category.setName("FoodIteme22");
+	category.setCategoryId("Food13");
+	category.setCategoryName("FoodIteme22");
 	category.setDescription("this is vege122");
 	
 	Assert.assertEquals("createCategory",true,categoryDAO.saveOrUpdate(category));
@@ -49,10 +49,10 @@ public void createCategory(){
 		//Assert.assertEquals("deleteCategory",true,categoryDAO.delete("Food13"));
 		
 //}
-	//@SuppressWarnings("deprecation")
-	//@Test
-	//public void listCategory(){
-	//	Assert.assertEquals("listCategory",20, categoryDAO.list().size());
+	@SuppressWarnings("deprecation")
+	@Test
+	public void listCategory(){
+		Assert.assertEquals("listCategory",20, categoryDAO.list().size());
 		
-	//}
+	}
 }

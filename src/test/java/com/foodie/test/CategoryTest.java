@@ -17,8 +17,8 @@ public static void main(String[] args){
 	CategoryDAO categoryDAO=(CategoryDAO) context.getBean("categoryDAO");
 	Category category=(Category) context.getBean("category");
 	
-	category.setId("f00045");
-	category.setName("food43");
+	category.setCategoryId("f00045");
+	category.setCategoryName("food43");
 	category.setDescription("This is Veg");
 	
 	categoryDAO.saveOrUpdate(category);

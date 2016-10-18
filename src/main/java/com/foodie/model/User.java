@@ -7,29 +7,38 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="User1")
+@Table(name="user")
 @Component
 public class User {
 	
 	@Id
-	public String id;
+	private String UserId;
 	
-	public String name;
-	public String email;
-	public String pwd;
-	public String mobile;
-	public String getId() {
-		return id;
+	private String UserName;
+	
+	private String email;
+	private String pwd;
+	private String mobile;
+	private String role;
+	public String getUserId() {
+		return UserId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		UserId = userId;
 	}
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return UserName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		UserName = userName;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	
 	public String getMobile() {
 		return mobile;

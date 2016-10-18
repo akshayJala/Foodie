@@ -2,8 +2,12 @@ package com.foodie.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +26,7 @@ public class CartDAOImpl implements CartDAO{
 	{
 		this.sessionFactory=sessionFactory;
 	}
-
+	@Transactional
 	public boolean save(Cart cart){
 		try
 		{
@@ -34,7 +38,7 @@ public class CartDAOImpl implements CartDAO{
 		}
 		return true;
 	}
-
+	@Transactional
 	public boolean update(Cart cart){
 		try
 		{
@@ -46,11 +50,11 @@ public class CartDAOImpl implements CartDAO{
 		}
 		return true;
 	}
-	
-	public boolean delete(String id){
+	@Transactional
+	public boolean delete(String CartId){
 		try
 		{
-			sessionFactory.getCurrentSession().delete(get(id));
+			sessionFactory.getCurrentSession().delete(get(CartId));
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -65,10 +69,10 @@ public class CartDAOImpl implements CartDAO{
 	}
 	
 	
-		
-	public Cart get(String id){
+	@Transactional
+	public Cart get(String CartId){
 		//select * from Cart where id='id'
-		String hql="from Cart where id='"+id+"'";
+		String hql="from Cart where id='"+CartId+"'";
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		List<Cart> list=query.list();
 		if(list==null||list.isEmpty())
@@ -78,11 +82,42 @@ public class CartDAOImpl implements CartDAO{
 		return list.get(0);//return the domain object//not true or false
 	}
 	
-	public List<Cart>list(){
-		return null;
+	@Transactional
+	public List<Cart> list() {
+	List<Cart> listCategory = (List<Cart>)sessionFactory.getCurrentSession()
+					.createCriteria(Cart.class)
+					.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+			return listCategory;
+		}
+	@Transactional
+	public List<Cart> list(String loggedInUserid) {
+		String hql = "from"+" Cart"+" where userId="+loggedInUserid+"and status='C'";
+		@SuppressWarnings("rawtypes")
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Cart> list = (List<Cart>)query.list();
+		return list;
 	}
-
-
+@Transactional
+	public int TotalAmount(String CartId){
+		try{
+			String hql = "from Cart where user_id=" + "'" + CartId + "'";
+			Session s = sessionFactory.getCurrentSession();
+			Transaction tx = s.beginTransaction();
+			org.hibernate.Query query = s.createQuery(hql);
+			List<Cart> all = query.list();
+			//tx.commit();
+			int k=0;
+			for (Cart temp : all) {
+				k = k + temp.getTotal_price();
+			}		
+			return k;	
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return 0;
+		}
+		
+		}
 
 	
 }

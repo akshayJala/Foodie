@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
+    <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,15 +15,15 @@
 <body>
 
 <div class="container">
-  <form class="form-horizontal">
-    <div class="form-group">
+  <form:form class="form-horizontal" action="/Register" method="post" comandName="user">
+    <div class="form-group" >
       <div class="col-sm-4">
-        <form:input type="text" class="form-control" path="fname" placeholder="First Name"/>
+        <form:input type="text" class="form-control" path="id" placeholder="User ID"/>
       </div>   
       </div> 
       <div class="form-group">
       <div class="col-sm-4">
-        <form:input type="text" class="form-control" path="lname" placeholder="Last Name"/>
+        <form:input type="text" class="form-control" path="name" placeholder="Name"/>
       </div>
       </div>
       <div class="form-group">
@@ -51,7 +52,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </div>
     </div>
-  </form>
+  </form:form>
 </div>
 </body>
 </html>

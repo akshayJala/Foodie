@@ -98,9 +98,8 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Know Us</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="Home">Home</a></li>
+        <li><a href="Contact">Contact Us</a></li>
 		<li><a href="Order">Order Your Meal</a></li>		
 </div>
       </ul>

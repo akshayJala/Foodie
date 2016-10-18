@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
 @Table(name="Category")
 @Component
 public class Category {
-	private String id;
-	private String name;
+	private String CategoryId;
+	private String CategoryName;
 	private String description;
 	
 	
@@ -33,24 +33,26 @@ public Set<Item> getItems() {
 		this.items=items;
 	}
 	@Id
-	@Column(name="ID")
-	public String getId() {
-		return id;
+	@Column(name="CategoryId")
+	
+	
+	public String getCategoryId() {
+		return CategoryId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setCategoryId(String categoryId) {
+		CategoryId = categoryId;
 	}
-	public String getName() {
-		return name;
+	public String getCategoryName() {
+		return CategoryName;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDescription() {
-		return description;
+	public void setCategoryName(String categoryName) {
+		CategoryName = categoryName;
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getDescription() {
+		return description;
 	}
 
 }

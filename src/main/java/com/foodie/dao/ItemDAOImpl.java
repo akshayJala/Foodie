@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import com.foodie.model.Item;
@@ -21,7 +22,7 @@ public class ItemDAOImpl implements ItemDAO{
 	{
 		this.sessionFactory=sessionFactory;
 	}
-
+	@Transactional
 	public boolean save(Item item){
 		try
 		{
@@ -33,7 +34,7 @@ public class ItemDAOImpl implements ItemDAO{
 		}
 		return true;
 	}
-
+	@Transactional
 	public boolean update(Item item){
 		try
 		{
@@ -46,10 +47,10 @@ public class ItemDAOImpl implements ItemDAO{
 		return true;
 	}
 	@Transactional
-	public boolean delete(String id){
+	public boolean delete(String ItemId){
 		try
 		{
-			sessionFactory.getCurrentSession().delete(get(id));
+			sessionFactory.getCurrentSession().delete(get(ItemId));
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -65,9 +66,9 @@ public class ItemDAOImpl implements ItemDAO{
 	}
 	
 		
-	public Item get(String id){
-		//select * from Category where id='id'
-		String hql="from Item1 where id='"+id+"'";
+	public Item get(String ItemId){
+		//select * from Category where ItemId='ItemId'
+		String hql="from Item1 where ItemId='"+ItemId+"'";
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		List<Item> list=query.list();
 		if(list==null||list.isEmpty())
@@ -77,9 +78,14 @@ public class ItemDAOImpl implements ItemDAO{
 		return list.get(0);
 	}
 	
-	public List<Item>list(){
-		return null;
-	}
+	@Transactional
+	public List<Item> list() {
+		@SuppressWarnings("unchecked")
+		List<Item> listProduct = (List<Item>) sessionFactory.getCurrentSession()
+				.createCriteria(Item.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
+		return listProduct;
+	}
 	
 }

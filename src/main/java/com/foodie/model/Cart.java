@@ -10,35 +10,51 @@ import org.springframework.stereotype.Component;
 @Table(name="Cart")
 @Component
 public class Cart {
-	public String id;
-	public String mailid;
-	public String cart_item;
-	public String total_price;
+	private String CartId;
+
+
+private String itemName;
+
+
+	private int quantity;
+	private int price;
+	private int total_price;
+	public String getCartId() {
+		return CartId;
+	}
+	public void setCartId(String cartId) {
+		CartId = cartId;
+	}
 	
+	
+
+	
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
 	@Id
-	public String getId() {
-		return id;
+	
+	public int getQuantity() {
+		return quantity;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
-	public String getMailid() {
-		return mailid;
-	}
-	public void setMailid(String mailid) {
-		this.mailid = mailid;
-	}
-	public String getCart_item() {
-		return cart_item;
-	}
-	public void setCart_item(String cart_item) {
-		this.cart_item = cart_item;
-	}
-	public String getTotal_price() {
+
+	public int getTotal_price() {
 		return total_price;
 	}
-	public void setTotal_price(String total_price) {
+	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 }

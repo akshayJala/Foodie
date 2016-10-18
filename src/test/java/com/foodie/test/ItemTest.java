@@ -17,9 +17,9 @@ public static void main(String[] args){
 	ItemDAO itemDAO=(ItemDAO) context.getBean("itemDAO");
 	Item item=(Item) context.getBean("item");
 	
-	item.setId("f0124a");
-	item.setName("foo14a5");
-	item.setPrice("120");
+	item.setItemId("f01d4a");
+	item.setItemName("foo14b5");
+	item.setPrice(120);
 	item.setDescription("This is Veg");
 	item.setSupplier_id("1002");
 	item.setCategory_id("f0001");

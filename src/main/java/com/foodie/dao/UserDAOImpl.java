@@ -1,10 +1,13 @@
 package com.foodie.dao;
 
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,17 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.foodie.model.User;
+import com.foodie.model.UserRole;
+
+
+
 
 @Repository("UserDAO")
 public class UserDAOImpl implements UserDAO{
 	Logger log=LoggerFactory.getLogger(UserDAOImpl.class);
+	
+	@Autowired 
+	private SessionFactory factory;
 	
 	@Autowired
 	private User user;
@@ -33,11 +43,11 @@ public class UserDAOImpl implements UserDAO{
 	}
 }
 
-	
-	public boolean delete(String id){
+	@Transactional
+	public boolean delete(String UserId){
 		try
 		{
-			sessionFactory.getCurrentSession().delete(get(id));
+			sessionFactory.getCurrentSession().delete(get(UserId));
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -45,6 +55,7 @@ public class UserDAOImpl implements UserDAO{
 		}
 		return true;
 	}
+	
 	@Transactional
 	public boolean saveorUpdate(User user) {
 		log.debug("method starts : saveOrUpdate");
@@ -53,12 +64,26 @@ public class UserDAOImpl implements UserDAO{
 		return true;
 		
 	}
-
+	@Transactional
+	public String getRole() {
+		Session session=factory.getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		Criteria cr=session.createCriteria(User.class);
+		cr.add(Restrictions.eq("roleId",getUser()));
+		UserRole ur=(UserRole)cr.uniqueResult();
+		tx.commit();
+		return ur.getRoleName();
+	}
 	
 	
+	private Object getUser() {
 		
+		return user;
+	}
+
+	@Transactional	
 	public User get(String hql){
-		//select * from User where id='id'
+		//select * from User where UserId='UserId'
 	
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		List<User> list=query.list();
@@ -80,11 +105,11 @@ log.debug("method ends : list");
 		return list;
 	}
 
-	
-	public User isValidUser(String id, String password) {
-		log.debug("method starts : isValidUser");
-		log.info("The ID is:"+ id);
-		String hql="from User where id='"+id+"'" + "and"+ "password="+"'"+password+"'" ;
+	@Transactional
+	public User isValidUser(String UserId, String pwd) {
+		log.debug("method starts : isValUserIdUser");
+		log.info("The ID is:"+ UserId);
+		String hql="from User where UserId='"+UserId+"'" + " and "+ "pwd="+"'"+pwd+"'" ;
 		log.info("The given query is:"+ hql);
 		return get(hql);
 	}

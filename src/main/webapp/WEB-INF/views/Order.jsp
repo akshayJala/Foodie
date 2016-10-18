@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <head>
   
   <title>OrderNow</title>
@@ -118,10 +122,10 @@
       <ul class="nav navbar-nav navbar-right">
         
          <ul class="nav navbar-nav navbar-right">
-        <li><a href="#SignUp" data-toggle="modal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="SignUp" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       </ul>
 	   <ul class="nav navbar-nav navbar-right">
-        <li><a href="#Login" data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="Login" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
 		
 		
@@ -163,7 +167,7 @@
 	<p>jkaebfre uwegbvirv ubgvirv urvberv usbvwrv urbvwr uvgbrv ubvwrv </p>
 	<p>Item code: 123</p>
 	<p>Price : Rs.125</p>
-		<p><button type="button" href="#" class="btn btn-info">Check Availability</button></p>
+		<p><button type="button" href="#" class="btn btn-info">Buy Now</button></p>
 	<p><button type="button" href="#" class="btn btn-warning">Add to cart</button></p>
 	</div>
 	<div class="col-md-2">
@@ -177,7 +181,7 @@
 	<p>jkaebfre uwegbvirv ubgvirv urvberv usbvwrv urbvwr uvgbrv ubvwrv </p>
 	<p>Item code: 123</p>
 	<p>Price : Rs.125</p>
-		<p><button type="button" href="#" class="btn btn-info">Check Availability</button></p>
+		<p><button type="button" href="#" class="btn btn-info">Buy Now</button></p>
 	<p><button type="button" href="#" class="btn btn-warning">Add to cart</button></p>
 	</div>
 	<div class="col-md-2">
@@ -191,7 +195,7 @@
 	<p>jkaebfre uwegbvirv ubgvirv urvberv usbvwrv urbvwr uvgbrv ubvwrv </p>
 	<p>Item code: 123</p>
 	<p>Price : Rs.125</p>
-	<p><button type="button" href="#" class="btn btn-info">Check Availability</button></p>
+	<p><button type="button" href="#" class="btn btn-info">Buy Now</button></p>
 	<p><button type="button" href="#" class="btn btn-warning">Add to cart</button></p>
 	</div>
     </div>
@@ -240,79 +244,10 @@
 originating from Chennai, India, as an entrée, or quick snack.</p>
 </div>
 </div>
-<div id="Login" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Login:</h4>
-      </div>
-	  <div class="modal-body">
-	  <form role="form">
-      
-    
-    <div class="form-group">
-        <input type="email" class="form-control" name="email" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-      
-      
-        <input type="password" class="form-control" name="pwd" placeholder="Enter password">
-      
-    </div>
-   </form>
-   
-    </div>
-      <div class="modal-footer">
-	  <button type="submit" class="btn btn-primary" href="">Login</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
- </div>
-  </form>   
+
    </div>
     </div>
 
-  </div>
-</div>
-<div id="SignUp" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sign Up:</h4>
-      </div>
-	  <div class="modal-body">
-	  <form role="form">
-      
-    
-    <div class="form-group">
-        <input type="text" class="form-control" name="name" placeholder="Name">
-    </div>
-	<div class="form-group">
-        <input type="text" class="form-control" name="id" placeholder="User Name">
-    </div>
-	<div class="form-group">
-        <input type="email" class="form-control" name="email" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-      
-      
-        <input type="password" class="form-control" name="pwd" placeholder="Enter password">
-      
-    </div>
-	<div class="form-group">
-        <input type="text" class="form-control" name="mobile" placeholder="Mobile No.">
-    </div>
-   </form>
-   
-    </div>
-      <div class="modal-footer">
-	  <button type="submit" class="btn btn-primary" href="">Sign Up</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
- </div>
-  </form>   
-   </div>
-    </div>
 
-  </div>
 </body>
 </html>

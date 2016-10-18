@@ -37,9 +37,9 @@ public class ItemTestCase {
 	}
 	@Test
 public void createItem(){
-	item.setId("Food113h");
-	item.setName("FoodItem122");
-	item.setPrice("160");
+	item.setItemId("Food113h");
+	item.setItemName("FoodItem122");
+	item.setPrice(160);
 	item.setDescription("this is veg122");
 	item.setSupplier_id("1002");
 	item.setCategory_id("f0001");

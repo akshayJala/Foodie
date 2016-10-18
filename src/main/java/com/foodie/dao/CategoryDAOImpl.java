@@ -35,7 +35,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 		}
 		return true;
 	}
-
+@Transactional
 	public boolean update(Category category){
 		try
 		{
@@ -48,10 +48,10 @@ public class CategoryDAOImpl implements CategoryDAO{
 		return true;
 	}
 	@Transactional
-	public boolean delete(String id){
+	public boolean delete(String CategoryId){
 		try
 		{
-			sessionFactory.getCurrentSession().delete(get(id));
+			sessionFactory.getCurrentSession().delete(get(CategoryId));
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -67,9 +67,9 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 	
 	@Transactional	
-	public Category get(String id){
-		//select * from Category where id='id'
-		String hql="from Category where id='"+id+"'";
+	public Category get(String CategoryId){
+		//select * from Category where CategoryId='CategoryId'
+		String hql="from Category where CategoryId='"+CategoryId+"'";
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		List<Category> list = (List<Category>) query.list();
 		if(list==null||list.isEmpty())
@@ -86,6 +86,18 @@ public class CategoryDAOImpl implements CategoryDAO{
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
 		return listCategory;
+	}
+
+	public Category getByName(String CategoryName) {
+		 String hql="from Category where CategoryName="+ "'"+ CategoryName +"'";
+		 Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		 @SuppressWarnings("unchecked")
+			
+		 List<Category> listCategory=(List<Category>)query.list();
+			if(listCategory!=null&&!listCategory.isEmpty()){
+				return listCategory.get(0);
+			}
+		return null;
 	}
 
 	
