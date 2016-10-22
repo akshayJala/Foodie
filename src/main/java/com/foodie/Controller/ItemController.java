@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,11 +47,11 @@ public class ItemController {
 
 	
 	
-	@RequestMapping(value="/itemList",method=RequestMethod.GET)
+	@RequestMapping(value="/Items",method=RequestMethod.GET)
 	public ModelAndView getItems() {
 		List<Item> items = itemDAO.list();
-		System.out.println("item list");
-		return new ModelAndView("Items", "items", items);
+		System.out.println("List of items");
+		return new ModelAndView("/Items", "itemList", items);
 	}
 
 /*public String listItems(Model model){
@@ -128,16 +130,16 @@ public String storeItem(ModelMap model,@RequestParam("file") MultipartFile file,
 		Path path=Paths.get("E:/DevOps/foodie/src/main/webapp/resources/images");
 		return "/AddItems";
 	}*/
-	@RequestMapping("item/remove/{id}")
-	public String removeItem(@PathVariable("id") String id,ModelMap model) throws Exception{
+	@RequestMapping("item/remove/{itemId}")
+	public String removeItem(@PathVariable("itemId") String id,ModelMap model) throws Exception{
 		try{
 			itemDAO.delete(id);
-			model.addAttribute("message","Item was Added");
+			model.addAttribute("message","Item was deleted");
 		}catch(Exception e){
 			model.addAttribute("message",e.getMessage());
 			e.printStackTrace();
 		}
-		return "item";
+		return "/Items";
 	}
 	
 	@RequestMapping("item/edit/{id}")
@@ -157,5 +159,10 @@ public String storeItem(ModelMap model,@RequestParam("file") MultipartFile file,
 		Item selectedItem=itemDAO.get(id);
 		model.addAttribute("selectedItem",selectedItem);
 		return model;
+	}
+	@RequestMapping(value="Details",method=RequestMethod.GET)
+	public ModelAndView Details(HttpServletRequest request,String ItemId){
+		//Item item=itemDAO.get(ItemId);
+		return new ModelAndView("Details","items",itemDAO.get(ItemId));
 	}
 }

@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import com.foodie.model.Category;
 import com.foodie.model.Item;
 
 @Repository("ItemDAO")
@@ -62,10 +65,10 @@ public class ItemDAOImpl implements ItemDAO{
 		return true;
 	}
 	
-		
+		@Transactional
 	public Item get(String ItemId){
 		//select * from Category where ItemId='ItemId'
-		String hql="from Item1 where ItemId='"+ItemId+"'";
+		String hql="from Item where itemId='"+ItemId+"'";
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		List<Item> list=query.list();
 		if(list==null||list.isEmpty())
@@ -74,8 +77,17 @@ public class ItemDAOImpl implements ItemDAO{
 			}
 		return list.get(0);
 	}
-	
-	@Transactional
+		@Transactional
+		public List<Item> list() {
+			@SuppressWarnings("unchecked")
+			List<Item> Item = (List<Item>) sessionFactory.getCurrentSession()
+					.createCriteria(Item.class)
+					.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+			return Item;
+		}
+		
+	/*@Transactional
 	public List<Item> list() {
 		@SuppressWarnings("unchecked")
 		List<Item> listProduct = (List<Item>) sessionFactory.getCurrentSession()
@@ -83,6 +95,7 @@ public class ItemDAOImpl implements ItemDAO{
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
 		return listProduct;
-	}
+	}*/
 	
 }
+		

@@ -116,7 +116,7 @@
       <h3>Delivery</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-      <p><a href="#" class="btn btn-success" role="button">Buy Now</a> </p>
+      <p><a class="btn btn-success" type="submit" role="button">Buy Now</a> </p>
     </div>
   </div>
 </div>

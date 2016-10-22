@@ -38,6 +38,9 @@
       color: teal !important;
 	  font-size: 18px;
   }
+  body{
+  font-family: josefin slab;
+  }
 </style>
  
 
@@ -77,7 +80,7 @@
 	</div>
 	</div>
 	
-<h3>Available Items List</h3>
+<ul><h3><center>Available Items List</center></h3></ul>
 <div class="container" id="itemTable" style="width:1145px;">
 		<table class="table table-hover" id="itemList">
 			<thead>
@@ -109,15 +112,18 @@
 				<c:forEach items="${itemList}" var="item">
 					<tr>
 						  <td style="width: 171px"><img
-							src="<c:url value="/resources/images/${item.ItemId}.jpg"/>" style="width: 100px;height: 90px;"/></td>
-						<td>${item.ItemId}</td>
-						<td>${item.ItemName}</td>
+							src="<c:url value="/resources/images/${item.itemId}.jpg"/>" style="width: 100px;height: 90px;"/></td>
+						<td>${item.itemId}</td>
+						<td>${item.itemName}</td>
 						<td>${item.price}</td>
 						<td style="width: 180px">${item.description}</td>
 						<td>${item.category_id}</td>
 					<td>${item.supplier_id}</td>
 						
-						
+					<td><a href="item/edit/${item.itemId}" class="btn btn-success" style="margin-left: 5px"> <span
+									class="glyphicon glyphicon-edit"></span></a>
+								<a href="item/remove/${item.itemId}" class="btn btn-danger" style="margin-left: 5px"> <span
+									class="glyphicon glyphicon-trash"></span></a></td>	
 						
 							
 					</tr>
@@ -125,9 +131,11 @@
 			</tbody>
 		</table>
 	</div>
+	<div class="container">
 <div class="row">
 <div class="col-sm-4">
 <li><a href="AddItems">AddItems</a></li>
+</div>
 </div>
 </body>
 </html>
