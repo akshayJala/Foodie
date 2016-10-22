@@ -54,13 +54,14 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-         <li><a href="AdminHome">Home</a></li>
+        <li><a href="AdminHome">Home</a></li>
         <li><a href="Order">Logout</a></li>
+
 		
-		
+		</ul>
 		
 </div>
-      </ul>
+      
     </div>
   </div>
 </nav>
@@ -75,60 +76,39 @@
 	</div>
 	</div>
 	</div>
-
-
-
-
-  <div class="container">
-			<div class="row main">
-				<div class="panel-heading">
-	               <div class="panel-title text-center">
-	               		<h4 class="title">Add Category</h4>
-	               		<hr />
-	               	</div>
-	            </div> 
-				<div class="main-login main-center">
-				<c:url var="addAction" value="/AddCategory"></c:url>
-<form:form action="AddCategory" method="post">
-						
-						
+	
+<h3>Your cart..</h3>
+<div class="container" id="itemTable" style="width:1145px;">
+		<table class="table table-hover" id="itemList">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Cart ID</th>
+					<th>Item Name</th>
+					<th>Quantity</th>
 					
-						
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Category ID</label>
-							<div class="cols-sm-4">
-								<div class="input-group">
-									
-									<form:input type="text" class="form-control" path="CategoryId" name="name" placeholder="Enter category id"/>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Category Name</label>
-							<div class="cols-sm-4">
-								<div class="input-group">
-									
-									<form:input type="text" class="form-control" path="CategoryName" name="name" placeholder="Enter category Name"/>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Description</label>
-							<div class="cols-sm-4">
-								<div class="input-group">
-									
-									<form:input type="text" class="form-control" path="Description" name="name" placeholder="Enter category description"/>
-								</div>
-							</div>
-						</div>
-						
-    <div class="form-group">
-    	<button type="submit" class="btn btn-primary">Add Category</button>
-   	</div>
-						
-          
-</form:form>
-    
-
+					<th>Total Price</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${cartList}" var="c">
+					<tr>
+						  <td style="width: 171px"><img
+							src="<c:url value="/resources/images/${item.itemId}.jpg"/>" style="width: 100px;height: 90px;"/></td>
+						<td>${c.cartId}</td>
+						<td>${c.itemName}</td>
+						<td>${c.quantity}</td>
+					
+						<td>${c.total_price}</tr>	
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+<div class="row">
+<div class="col-sm-4">
+<li><a href="Items">Add more</a></li>
+</div>
 </body>
 </html>

@@ -12,8 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.foodie.model.ShippingAddress;
 import com.foodie.model.User;
 import com.foodie.model.UserRole;
 
@@ -47,7 +49,7 @@ public class UserDAOImpl implements UserDAO{
 	public boolean delete(String UserId){
 		try
 		{
-			sessionFactory.getCurrentSession().delete(get(UserId));
+			sessionFactory.getCurrentSession().delete(getUser(UserId));
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -64,6 +66,7 @@ public class UserDAOImpl implements UserDAO{
 		return true;
 		
 	}
+	
 	@Transactional
 	public String getRole() {
 		Session session=factory.getCurrentSession();
@@ -82,7 +85,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Transactional	
-	public User get(String hql){
+	public User getUser(String hql){
 		//select * from User where UserId='UserId'
 	
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
@@ -91,7 +94,7 @@ public class UserDAOImpl implements UserDAO{
 			{
 			return list.get(0);//return the domain object//not true or false
 			}
-		return null;
+		return new User();
 	}
 	
 	@Transactional
@@ -109,11 +112,48 @@ log.debug("method ends : list");
 	public User isValidUser(String UserId, String pwd) {
 		log.debug("method starts : isValUserIdUser");
 		log.info("The ID is:"+ UserId);
-		String hql="from User where UserId='"+UserId+"'" + " and "+ "pwd="+"'"+pwd+"'" ;
+		String hql="";
 		log.info("The given query is:"+ hql);
-		return get(hql);
+		return getUser(hql);
 	}
 
+	@Transactional
+	public User verifyUser(User u) {
+		
+			Session session=factory.getCurrentSession();
+			Criteria cr=session.createCriteria(User.class);
+			cr.add(Restrictions.eq("UserId",u.getUserId()));
+			cr.add(Restrictions.eq("pwd",u.getPwd()));
+			User usr=(User)cr.uniqueResult();
+			return usr;
+	}
+	
+	@Transactional
+	public boolean isAllReadyRegister(String email, boolean b) {
+		
+		String hql = "from User where emailid ='"+ email +"'";
+				
+					
+		org.hibernate.Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<User> list = (List<User>) query.list();
+		if (list != null && !list.isEmpty()) {
+			return true;
+		}
+		return false;
+
+	}
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public ShippingAddress getShippingAddress() {
+		Session session=factory.getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		Criteria cr=session.createCriteria(ShippingAddress.class);
+		cr.add(Restrictions.eq("userId",user));
+		cr.setFirstResult(1);
+		ShippingAddress shippingAddress=(ShippingAddress)cr.uniqueResult();
+		tx.commit();
+		return shippingAddress;
+	}
 	
 	
 

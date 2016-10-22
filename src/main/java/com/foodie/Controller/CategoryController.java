@@ -1,5 +1,7 @@
 package com.foodie.Controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.foodie.dao.CategoryDAO;
 import com.foodie.model.Category;
+import com.foodie.model.Item;
 
 @Controller
 public class CategoryController {
@@ -22,13 +25,10 @@ public class CategoryController {
 	@Autowired
 	private CategoryDAO categoryDAO;
 	
-	@RequestMapping(value="/Category",method=RequestMethod.GET)
-	public String listCategories(Model model){
-		log.debug("category list method starts");
-		model.addAttribute("category",category);
-		model.addAttribute("categoryList",this.categoryDAO.list());
-		log.debug("category list method ends");
-		return "category";
+	@RequestMapping(value="/categoryList",method=RequestMethod.GET)
+	public ModelAndView getCategories() {
+		List<Category> categories = categoryDAO.list();
+		return new ModelAndView("CategoryList", "categories", categories);
 	}
   @RequestMapping(value="/AddCategory",method=RequestMethod.POST)
   public String addCategory(@ModelAttribute("category")Category category){

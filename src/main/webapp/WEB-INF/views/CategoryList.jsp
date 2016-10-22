@@ -54,15 +54,14 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="AddItems">View Items</a></li>
-        <li><a href="AddSupplier">Suppliers</a></li>
-        <li><a href="AddCategory">Categories</a></li>
+       
+        <li><a href="AdminHome">Home</a></li>
         <li><a href="Order">Logout</a></li>
 		
-		
+		</ul>
 		
 </div>
-      </ul>
+      
     </div>
   </div>
 </nav>
@@ -77,42 +76,39 @@
 	</div>
 	</div>
 	</div>
+	
+<h3>Available Items List</h3>
+<div class="container" id="itemTable" style="width:1145px;">
+		
+		<p>The List of Items</p>
+		<table class="table table-hover" id="itemList">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Description</th>
+					
+					
+					<th>/Edit/Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${categoryList}" var="category">
+					
+						<td>${category.categoryId}</td>
+						<td>${category.categoryName}</td>
+						<td style="width: 180px">${category.description}</td>
+							
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+<div class="row">
+<div class="col-sm-4">
+<li><a href="AddCategory">AddCategories</a></li>
+</div>
 
-<h3>Available Supplier List</h3>
-<c:if test="${!empty itemList}">
-<table class="tg">
-<tr>
-    <th width="80">Supplier ID</th>
-    <th width="120">Supplier Name</th>
-    <th width="200">Supplier Address</th>
-    <th width="60">Edit</th>
-    <th width="60">Delete</th>
-    </tr>
-    <c:forEach items="${supplierList}" var="item">
-    <tr>
-    <td>${supplier.supplierid}</td>
-    <td>${supplier.suppliername}</td>
-    <td>${supplier.address}</td>
-    <td><a href="<c:url value='item/edit/${supplier.supplierid}'/>">Edit</a></td>
-    <td><a href="<c:url value='item/remove/${supplier.supplierid}'/>">Delete</a></td>
-    </tr>
-    </c:forEach>
-    
-    </table>
-    </c:if>
-
-
-  <div class="container">
-			<div class="row main">
-				<div class="panel-heading">
-	               <div class="panel-title text-center">
-	               		<h4 class="title">Supplier added!Click to add next Supplier.<h4>
-	               		<li><a href="AddSupplier">Add Suppliers</a></li>
-	               		<hr />
-	               	</div>
-	            </div> 
-				
-    
-
+</div>
 </body>
 </html>

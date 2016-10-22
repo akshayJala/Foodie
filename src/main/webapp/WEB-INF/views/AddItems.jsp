@@ -54,9 +54,8 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="AddItems">View Items</a></li>
-        <li><a href="AddSupplier">Suppliers</a></li>
-        <li><a href="AddCategory">Categories</a></li>
+        
+        <li><a href="AdminHome">Home</a></li>
         <li><a href="Order">Logout</a></li>
 		
 		
@@ -77,34 +76,8 @@
 	</div>
 	</div>
 	</div>
-<h3>Available Items List</h3>
-<c:if test="${!empty itemList}">
-<table class="tg">
-<tr>
-    <th width="80">Item ID</th>
-    <th width="120">Item Name</th>
-    <th width="200">Item Description</th>
-    <th width="80">Price</th>
-    <th width="80">Item Category</th>
-    <th width="80">Item Supplier</th>
-    <th width="60">Edit</th>
-    <th width="60">Delete</th>
-    </tr>
-    <c:forEach items="${itemList}" var="item">
-    <tr>
-    <td>${item.itemid}</td>
-    <td>${item.itemname}</td>
-    <td>${item.description}</td>
-    <td>${item.price}</td>
-    <td>${item.category.categoryname}</td>
-    <td>${item.supplier.suppliername}</td>
-    <td><a href="<c:url value='item/edit/${item.itemid}'/>">Edit</a></td>
-    <td><a href="<c:url value='item/remove/${item.itemid}'/>">Delete</a></td>
-    </tr>
-    </c:forEach>
-    
-    </table>
-    </c:if>
+	
+
   <div class="container">
 			<div class="row main">
 				<div class="panel-heading">
@@ -123,7 +96,7 @@
 							<div class="cols-sm-4">
 								<div class="input-group">
 									
-									<form:input type="text" class="form-control" path="ItemName" name="name" placeholder="Enter item Name"/>
+									<form:input type="text" class="form-control" path="ItemName"  placeholder="Enter item Name"/>
 								</div>
 							</div>
 						</div>
@@ -132,7 +105,7 @@
 							<div class="cols-sm-4">
 								<div class="input-group">
 									
-									<form:input type="text" class="form-control" path="ItemId" name="name" placeholder="Enter item ID"/>
+									<form:input type="text" class="form-control" path="ItemId"  placeholder="Enter item ID"/>
 								</div>
 							</div>
 						</div>
@@ -141,7 +114,7 @@
 							<div class="cols-sm-4">
 								<div class="input-group">
 									
-									<form:input type="text" class="form-control" path="price" name="name" placeholder="Enter item Price"/>
+									<form:input type="text" class="form-control" path="price"  placeholder="Enter item Price"/>
 								</div>
 							</div>
 						</div>
@@ -150,7 +123,7 @@
 							<div class="cols-sm-4">
 								<div class="input-group">
 									
-									<form:input type="text" class="form-control" path="Description" name="name" placeholder="Enter item description"/>
+									<form:input type="text" class="form-control" path="Description"  placeholder="Enter item description"/>
 								</div>
 							</div>
 						</div>
@@ -159,7 +132,7 @@
 							<div class="cols-sm-4">
 								<div class="input-group">
 									
-									<form:input type="text" class="form-control" path="Category_id" name="name" placeholder="Enter category id"/>
+									<form:input type="text" class="form-control" path="Category_id"  placeholder="Enter category id"/>
 								</div>
 							</div>
 						</div>
@@ -168,7 +141,7 @@
 							<div class="cols-sm-4">
 								<div class="input-group">
 									
-									<form:input type="text" class="form-control" path="Supplier_id" name="name" placeholder="Enter supplier id"/>
+									<form:input type="text" class="form-control" path="Supplier_id"  placeholder="Enter supplier id"/>
 								</div>
 							</div>
 						</div>
@@ -180,7 +153,7 @@
       <input class="form-control" name="file" type="file"/>
     </div>
     <div class="form-group">
-    	<button type="submit" class="btn btn-primary">Update Product</button>
+    	<button type="submit" class="btn btn-primary">Update Item</button>
    	</div>
 						
           

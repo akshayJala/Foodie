@@ -14,4 +14,5 @@ public interface CartDAO {
 	public boolean saveorUpdate(Cart cart);
 	public boolean delete(String CartId);
 	public int TotalAmount(String loggedInUserid);
+	public Long getCount(String UserName);
 }

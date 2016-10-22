@@ -83,7 +83,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="Home">Home</a></li>
+        <li><a href="AdminHome">Home</a></li>
         <li><a href="Order">Logout</a></li>
        
       
@@ -109,13 +109,24 @@
 	</div>
 <div class="row">
 <div class="col-sm-4">
-<li><a href="AddItems">Items</a></li>
+<li><a href="AddItems">AddItems</a></li>
 </div>
 <div class="col-sm-4">
-<li><a href="AddCategory">Categories</a></li>
+<li><a href="AddCategory">AddCategories</a></li>
 </div>
 <div class="col-sm-4">
-<li><a href="AddSupplier">Suppliers</a></li>
+<li><a href="AddSupplier">AddSuppliers</a></li>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-4">
+<li><a href="Items">ItemsList</a></li>
+</div>
+<div class="col-sm-4">
+<li><a href="CategoryList">CategorieList</a></li>
+</div>
+<div class="col-sm-4">
+<li><a href="SupplierList">SupplierList</a></li>
 </div>
 </div>
 

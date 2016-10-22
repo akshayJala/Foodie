@@ -25,9 +25,9 @@ private Cart cart;
 private ItemDAO itemDAO;
 
 
-@RequestMapping(value="/myCart",method=RequestMethod.GET)
+@RequestMapping(value="/Cart",method=RequestMethod.GET)
 public String myCart(Model model,HttpSession session){
-	model.addAttribute("cart",new Cart());
+	model.addAttribute("Cart",new Cart());
 	//get the logged in user id
 	String loggedInUserid=(String) session.getAttribute("loggedInUserID");
 int cartSize=cartDAO.list(loggedInUserid).size();
@@ -41,20 +41,20 @@ if(cartSize==0){
 return "/Home";
 }
 //to add and update cart
-@RequestMapping(value="/myCart/add/{id}",method=RequestMethod.GET)
+@RequestMapping(value="/Cart/addToCart/{id}",method=RequestMethod.GET)
 public String addToCart(@PathVariable("id")String id,HttpSession session){
 	Item item=itemDAO.get(id);
 	
 	cart.setTotal_price(item.getPrice());
-	cart.setItemName(item.getItemName());
+	//cart.setItemId(item.getItemId());
 	cart.setQuantity(1);
 	String loggedInUserid=(String) session.getAttribute("loggedInUserID");
 	cart.setCartId(loggedInUserid);
 	cartDAO.saveorUpdate(cart);
-	return "Home";
+	return "Items";
 	
 }
-@RequestMapping("myCart/delete/{id}")
+@RequestMapping("Cart/delete/{id}")
 public String removeCart(@PathVariable("id") String id,ModelMap model) throws Exception{
 	try{
 		cartDAO.delete(id);

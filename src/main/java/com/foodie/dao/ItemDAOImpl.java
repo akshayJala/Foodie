@@ -14,9 +14,6 @@ import com.foodie.model.Item;
 public class ItemDAOImpl implements ItemDAO{
 	
 	@Autowired
-	private Item item;
-	
-	@Autowired
 	private SessionFactory sessionFactory;
 	public ItemDAOImpl(SessionFactory sessionFactory)
 	{

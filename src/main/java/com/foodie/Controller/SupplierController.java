@@ -1,5 +1,7 @@
 package com.foodie.Controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.foodie.dao.SupplierDAO;
+import com.foodie.model.Item;
 import com.foodie.model.Supplier;
 
 @Controller
@@ -22,27 +25,24 @@ public class SupplierController {
 	@Autowired
 	private SupplierDAO supplierDAO;
 	
-	@RequestMapping(value="/Suppliers",method=RequestMethod.GET)
-	public String listSuppliers(Model model){
-		log.debug("supplier list method starts");
-		model.addAttribute("supplier",supplier);
-		model.addAttribute("supplierList",this.supplierDAO.list());
-		log.debug("supplier list method ends");
-		return "supplier";
+	@RequestMapping(value="/supplierList",method=RequestMethod.GET)
+	public ModelAndView getCategories() {
+		List<Supplier> suppliers = supplierDAO.list();
+		return new ModelAndView("SupplierList", "suppliers", suppliers);
 	}
   @RequestMapping(value="/AddSupplier",method=RequestMethod.POST)
-  public String addSupplier(@ModelAttribute("supplier")Supplier supplier){
+  public String addSupplier(@ModelAttribute("AddSupplier")Supplier supplier){
 	log.debug("add supplier method starts");
 	
 	  supplierDAO.saveOrUpdate(supplier);
 	log.debug("add supplier method ends");
-	   return "supplier";
+	   return "/AddSupplier";
 	   
    }
    @RequestMapping("supplier/remove/{id}")
    public ModelAndView deleteSupplier(@PathVariable("id")String id)throws Exception{
 	   boolean flag=supplierDAO.delete(id);
-	   ModelAndView mv=new ModelAndView("supplier");
+	   ModelAndView mv=new ModelAndView("AddSupplier");
 	   String msg="Operation Successful";
 	   if(flag!=true)
 	   {
@@ -56,7 +56,7 @@ public class SupplierController {
 	   log.debug("Edit Supplier method starts");
 	   supplierDAO.saveOrUpdate(supplier);
 	   log.debug("Edit Supplier  ends");
-	   return "supplier";
+	   return "AddSupplier";
 	   
    }
 }

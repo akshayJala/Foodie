@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,53 +58,64 @@ public class UserController {
 	HttpSession session;
 	@RequestMapping(value="/SignUp", method=RequestMethod.POST)
 	public ModelAndView registerUser(@ModelAttribute User user){
+		
 		//log.debug("register method starts");
-		ModelAndView mv=new ModelAndView("/Order");
+		user.setRole("ROLE_USER");
+		ModelAndView mv=new ModelAndView("/UserHome");
 		userDAO.saveorUpdate(user);
 		
 		//log.debug("register method ends");
 		return mv;
 	}
 	@RequestMapping(value="/Login", method=RequestMethod.POST)
-	public ModelAndView Login(HttpServletRequest request,ModelMap model,@RequestParam(value="UserId", required=true) String UserId,
-			@RequestParam(value="pwd")String pwd, HttpSession session, String CartId){
-		log.debug("login method starts");
-		ModelAndView mv=new ModelAndView("/UserHome");
-		user=userDAO.isValidUser(UserId,pwd);
+	public ModelAndView Login(@ModelAttribute User u){
+		ModelAndView mv=new ModelAndView("/Order");
+		user=userDAO.verifyUser(u);
 		if(user!=null){
-			user=userDAO.get(UserId);
-			session.setAttribute("loggedInUser", user.getUserName());
-			session.setAttribute("loggedInUserID",user.getUserId() );
-			session.setAttribute("user", user);
-			if(userDAO.getRole().equals("ROLE_ADMIN")){
-				mv.addObject("isAdmin", "true");
-				session.setAttribute("supplier", supplier);
-				session.setAttribute("supplierList", supplierDAO.list());
-				session.setAttribute("category", category);
-				session.setAttribute("categoryList", categoryDAO.list());
-			}else{
-				mv.addObject("isAdmin", "false");
-				cart=cartDAO.get(CartId);
-				mv.addObject("cart", cart);
-				
-				List<Cart> cartList=cartDAO.list();
-				mv.addObject("cartList", cartList);
-				mv.addObject("cartSize", cartList.size());
-			}
-		}
-			else{
-				mv.addObject("invalidDetails", "true");
-				mv.addObject("errorMessage", "invalid details!");
-				
-			}
+			System.out.println("User");
+			log.debug("valid");
+			if(user.getRole().equals("ROLE_ADMIN")){
+				System.out.println("admin");
+				log.debug("admin login");
+			mv=new ModelAndView("/AdminHome");
+		}else {
+			System.out.println("home");
+			log.debug("user login");
+			mv=new ModelAndView("/UserHome");
 			
-		
-		
-		log.debug("login method ends");
-		return mv;
 	}
 	
-	@RequestMapping("/logout")
+		}
+		return mv;
+	}
+		//log.debug("login method starts");
+		
+	//	user=userDAO.isValidUser(UserId,pwd);
+		
+	
+		//	if(user.getRole().equals("ROLE_ADMIN")){
+			//	ModelAndView mv=new ModelAndView("/AdminHome");
+				//model.addAttribute("admin", true);
+//				session.setAttribute("supplier", supplier);
+	//			session.setAttribute("supplierList", supplierDAO.list());
+		//		session.setAttribute("category", category);
+			//	session.setAttribute("categoryList", categoryDAO.list());
+				//session.setAttribute("item", item);
+//				session.setAttribute("itemList", itemDAO.list());
+	//			return "/AdminHome";
+		//	}else if(user.getRole().equals("ROLE_USER")){
+			//	ModelAndView mv=new ModelAndView("/UserHome");
+				//model.addAttribute("user", true);
+//				session.setAttribute("UserName", user.getUserName());
+	//			session.setAttribute("UserID", user.getUserId());
+		//		return "/UserHome";
+//		}else{
+	//	model.addAttribute("errorMessage","invalid details");
+		//log.debug("login method ends");
+		//return "/Order";
+	//}}
+	
+	@RequestMapping("/Logout")
 	public ModelAndView logout(HttpServletRequest request,HttpSession session)
 	{
 		log.debug("logout method starts");

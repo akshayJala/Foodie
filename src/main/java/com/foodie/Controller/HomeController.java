@@ -72,6 +72,30 @@ public class HomeController {
 		ModelAndView mv=new ModelAndView("/About");
 		return mv;
 	}
+	@RequestMapping("/Items")
+	public ModelAndView Items(){
+		
+		ModelAndView mv=new ModelAndView("/Items");
+		return mv;
+	}
+	@RequestMapping("/SupplierList")
+	public ModelAndView Suppliers(){
+		
+		ModelAndView mv=new ModelAndView("/SupplierList");
+		return mv;
+	}
+	@RequestMapping("/CategoryList")
+	public ModelAndView Categories(){
+		
+		ModelAndView mv=new ModelAndView("/CategoryList");
+		return mv;
+	}
+	@RequestMapping("/CartList")
+	public ModelAndView CartList(){
+		
+		ModelAndView mv=new ModelAndView("/CartList");
+		return mv;
+	}
 	@RequestMapping("/Order")
 	public ModelAndView Order(){
 		
@@ -146,8 +170,7 @@ public class HomeController {
 		ModelAndView mv=new ModelAndView("/AddCategory","command",new Category());
 		return mv;
 	}
-	
-	
+
 	
 	@RequestMapping(value="/AddSupplier",method=RequestMethod.GET)
 	public ModelAndView AddSupplier(){
@@ -155,18 +178,7 @@ public class HomeController {
 		ModelAndView mv=new ModelAndView("/AddSupplier","command",new Supplier());
 		return mv;
 	}
-	@RequestMapping("/SupplierAdded")
-	public ModelAndView SupplierAdded(){
-		
-		ModelAndView mv=new ModelAndView("/SupplierAdded");
-		return mv;
-	}
-	@RequestMapping("/CategoryAdded")
-	public ModelAndView CategoryAdded(){
-		
-		ModelAndView mv=new ModelAndView("/CategoryAdded");
-		return mv;
-	}
+	
 }
 
 	

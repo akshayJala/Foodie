@@ -32,20 +32,20 @@ public class AdminController {
 	private ItemDAO itemDAO;
 
 	
-	@RequestMapping("/Categories")
+	@RequestMapping("/AddCategory")
 	public ModelAndView categories(){
 		log.debug("manage categories method starts");
-		ModelAndView mv=new ModelAndView("/home");
+		ModelAndView mv=new ModelAndView("/AddCategory");
 		mv.addObject("category",category);
 		mv.addObject("isAdminClickedCategory","true");
 		mv.addObject("categoryList",categoryDAO.list());
 		log.debug("manage categories method ends");
 		return mv;
 	}
-	@RequestMapping("/Items")
+	@RequestMapping("/AddItems")
 	public ModelAndView items(){
 		log.debug("manage item method starts");
-		ModelAndView mv=new ModelAndView("/home");
+		ModelAndView mv=new ModelAndView("/AddItems");
 		mv.addObject("item",item);
 		mv.addObject("isAdminClickedItems","true");
 		
@@ -53,10 +53,10 @@ public class AdminController {
 		log.debug("manage item method ends");
 		return mv;
 	}
-	@RequestMapping("/Suppliers")
+	@RequestMapping("/AddSupplier")
 	public ModelAndView suppliers(){
 		log.debug("manage supplier method starts");
-		ModelAndView mv=new ModelAndView("/home");
+		ModelAndView mv=new ModelAndView("/AddSupplier");
 		mv.addObject("supplier",supplier);
 		mv.addObject("isAdminClickedSuppliers","true");
 		mv.addObject("supplierList",supplierDAO.list());

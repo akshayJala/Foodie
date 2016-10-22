@@ -116,8 +116,14 @@ public class CartDAOImpl implements CartDAO{
 			e.printStackTrace();
 			return 0;
 		}
-		
-		}
+				}
 
-	
+@Transactional
+public Long getCount(String username) {
+	String hql ="select count(*) from Cart where UserName = '" + username + "'";
+	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	Long count = (Long) query.uniqueResult();
+	return count;
+}
+
 }

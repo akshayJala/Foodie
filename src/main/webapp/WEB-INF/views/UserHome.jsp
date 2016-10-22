@@ -120,9 +120,11 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="Cart" ><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+      </ul>
         
 	   <ul class="nav navbar-nav navbar-right">
-        <li><a href="Order" ><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a href="Order" ><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
 		
 		

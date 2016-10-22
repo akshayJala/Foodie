@@ -56,11 +56,12 @@
       <ul class="nav navbar-nav navbar-right">
          <li><a href="AdminHome">Home</a></li>
         <li><a href="Order">Logout</a></li>
+
 		
-		
+		</ul>
 		
 </div>
-      </ul>
+      
     </div>
   </div>
 </nav>
@@ -75,60 +76,39 @@
 	</div>
 	</div>
 	</div>
-
-
-
-
-  <div class="container">
-			<div class="row main">
-				<div class="panel-heading">
-	               <div class="panel-title text-center">
-	               		<h4 class="title">Add Category</h4>
-	               		<hr />
-	               	</div>
-	            </div> 
-				<div class="main-login main-center">
-				<c:url var="addAction" value="/AddCategory"></c:url>
-<form:form action="AddCategory" method="post">
-						
-						
+	
+<h3>Available Items List</h3>
+<div class="container" id="itemTable" style="width:1145px;">
+		
+		<p>The List of Suppliers</p>
+		<table class="table table-hover" id="itemList">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Address</th>
 					
-						
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Category ID</label>
-							<div class="cols-sm-4">
-								<div class="input-group">
-									
-									<form:input type="text" class="form-control" path="CategoryId" name="name" placeholder="Enter category id"/>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Category Name</label>
-							<div class="cols-sm-4">
-								<div class="input-group">
-									
-									<form:input type="text" class="form-control" path="CategoryName" name="name" placeholder="Enter category Name"/>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Description</label>
-							<div class="cols-sm-4">
-								<div class="input-group">
-									
-									<form:input type="text" class="form-control" path="Description" name="name" placeholder="Enter category description"/>
-								</div>
-							</div>
-						</div>
-						
-    <div class="form-group">
-    	<button type="submit" class="btn btn-primary">Add Category</button>
-   	</div>
-						
-          
-</form:form>
-    
+					
+					<th>/Edit/Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${supplierList}" var="supplier">
+					
+						<td>${supplier.supplierId}</td>
+						<td>${supplier.supplierName}</td>
+						<td style="width: 180px">${supplier.address}</td>
+							
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+<div class="row">
+<div class="col-sm-4">
+<li><a href="AddSupplier">AddSuppliers</a></li>
+</div>
 
+</div>
 </body>
 </html>

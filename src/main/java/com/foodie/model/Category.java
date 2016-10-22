@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 @Table(name="Category")
 @Component
 public class Category {
+	
 	private String CategoryId;
 	private String CategoryName;
 	private String description;
@@ -32,9 +33,9 @@ public Set<Item> getItems() {
 	public void setItems(Set<Item> items){
 		this.items=items;
 	}
+	
 	@Id
 	@Column(name="CategoryId")
-	
 	
 	public String getCategoryId() {
 		return CategoryId;

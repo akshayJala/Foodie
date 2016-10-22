@@ -54,9 +54,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="AddItems">View Items</a></li>
-        <li><a href="AddSupplier">Suppliers</a></li>
-        <li><a href="AddCategory">Categories</a></li>
+        <li><a href="AdminHome">Home</a></li>
         <li><a href="Order">Logout</a></li>
 		
 		
@@ -78,28 +76,6 @@
 	</div>
 	</div>
 
-<h3>Available Supplier List</h3>
-<c:if test="${!empty itemList}">
-<table class="tg">
-<tr>
-    <th width="80">Supplier ID</th>
-    <th width="120">Supplier Name</th>
-    <th width="200">Supplier Address</th>
-    <th width="60">Edit</th>
-    <th width="60">Delete</th>
-    </tr>
-    <c:forEach items="${supplierList}" var="item">
-    <tr>
-    <td>${supplier.supplierid}</td>
-    <td>${supplier.suppliername}</td>
-    <td>${supplier.address}</td>
-    <td><a href="<c:url value='item/edit/${supplier.supplierid}'/>">Edit</a></td>
-    <td><a href="<c:url value='item/remove/${supplier.supplierid}'/>">Delete</a></td>
-    </tr>
-    </c:forEach>
-    
-    </table>
-    </c:if>
 
 
   <div class="container">

@@ -1,7 +1,11 @@
 package com.foodie.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -10,15 +14,27 @@ import org.springframework.stereotype.Component;
 @Table(name="Cart")
 @Component
 public class Cart {
+	
 	private String CartId;
 
 
-private String itemName;
+
+	//private Item item;
 
 
+/*private Item itemId;
+	
+	public Item getItemId() {
+	return itemId;
+}
+public void setItemId(Item itemId) {
+	this.itemId = itemId;
+}*/
 	private int quantity;
-	private int price;
+	
 	private int total_price;
+	@Id
+	@Column(name="CartId")
 	public String getCartId() {
 		return CartId;
 	}
@@ -26,16 +42,6 @@ private String itemName;
 		CartId = cartId;
 	}
 	
-	
-
-	
-	public String getItemName() {
-		return itemName;
-	}
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-	@Id
 	
 	public int getQuantity() {
 		return quantity;
@@ -50,11 +56,11 @@ private String itemName;
 	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
+	//public Item getItem() {
+		//return item;
+	//}
+	//public void setItem(Item item) {
+		//this.item = item;
+	//}
 
 }

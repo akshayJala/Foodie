@@ -17,19 +17,8 @@ public class Item {
 	
 	@Id
 	private String ItemId;
-	private String ItemName;
-	public String getItemId() {
-		return ItemId;
-	}
-	public void setItemId(String itemId) {
-		ItemId = itemId;
-	}
-	public String getItemName() {
-		return ItemName;
-	}
-	public void setItemName(String itemName) {
-		ItemName = itemName;
-	}
+	
+	private String ItemName;	
 	private int price;
 	private String description;
 	private String category_id;
@@ -43,26 +32,18 @@ public class Item {
 	private Supplier supplier;
 	@Transient
 	private MultipartFile image;
-	
-	public MultipartFile getImage() {
-		return image;
+	public String getItemId() {
+		return ItemId;
 	}
-	public void setImage(MultipartFile image) {
-		this.image = image;
+	public void setItemId(String itemId) {
+		ItemId = itemId;
 	}
-	public Category getCategory() {
-		return category;
+	public String getItemName() {
+		return ItemName;
 	}
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setItemName(String itemName) {
+		ItemName = itemName;
 	}
-	public Supplier getSupplier() {
-		return supplier;
-	}
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
-	}
-
 	public int getPrice() {
 		return price;
 	}
@@ -87,5 +68,22 @@ public class Item {
 	public void setSupplier_id(String supplier_id) {
 		this.supplier_id = supplier_id;
 	}
-
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	public Supplier getSupplier() {
+		return supplier;
+	}
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+	public MultipartFile getImage() {
+		return image;
+	}
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
 }
