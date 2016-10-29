@@ -2,65 +2,78 @@ package com.foodie.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="Cart")
 @Component
+@Table(name="cart")
 public class Cart {
 	
-	private String CartId;
 
-
-
-	//private Item item;
-
-
-/*private Item itemId;
-	
-	public Item getItemId() {
-	return itemId;
-}
-public void setItemId(Item itemId) {
-	this.itemId = itemId;
-}*/
-	private int quantity;
-	
-	private int total_price;
 	@Id
-	@Column(name="CartId")
-	public String getCartId() {
-		return CartId;
-	}
-	public void setCartId(String cartId) {
-		CartId = cartId;
-	}
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
+	@Transient
+	private int total;
 	
 	
+	private String itemName;
+	private int price;
+	private int quantity;
+	private String status;
+	private String userID;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public int getQuantity() {
 		return quantity;
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-	public int getTotal_price() {
-		return total_price;
+	public String getStatus() {
+		return status;
 	}
-	public void setTotal_price(int total_price) {
-		this.total_price = total_price;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	//public Item getItem() {
-		//return item;
-	//}
-	//public void setItem(Item item) {
-		//this.item = item;
-	//}
-
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 }

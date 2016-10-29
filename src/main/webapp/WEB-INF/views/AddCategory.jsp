@@ -83,7 +83,7 @@
 			<div class="row main">
 				<div class="panel-heading">
 	               <div class="panel-title text-center">
-	               		<h4 class="title">Add Category</h4>
+	               		<h4 class="title">Add/Update Category</h4>
 	               		<hr />
 	               	</div>
 	            </div> 

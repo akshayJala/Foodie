@@ -15,5 +15,5 @@ public interface UserDAO {
 	public User isValidUser(String UserId, String pwd);
 	public boolean isAllReadyRegister(String email, boolean b);
 	public ShippingAddress getShippingAddress();
-
+	public Object getUser();
 }

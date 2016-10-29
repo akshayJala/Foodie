@@ -36,13 +36,13 @@ public class CategoryController {
 	log.debug("add category method starts");
 	  categoryDAO.saveOrUpdate(category);
 	log.debug("add category method ends");
-	   return "category";
+	   return "/AddCategory";
 	   
    }
-   @RequestMapping("category/remove/{id}")
+   @RequestMapping("/category/remove/{id}")
    public ModelAndView deleteCategory(@PathVariable("id")String id)throws Exception{
 	   boolean flag=categoryDAO.delete(id);
-	   ModelAndView mv=new ModelAndView("category");
+	   ModelAndView mv=new ModelAndView("/CategoryList");
 	   String msg="Operation Successful";
 	   if(flag!=true)
 	   {
@@ -51,13 +51,13 @@ public class CategoryController {
 	   mv.addObject("msg",msg);
 	   return mv;
    }
-   @RequestMapping("category/edit/{id}")
+  /* @RequestMapping("/category/edit/{id}")
    public String editCategory(@ModelAttribute("category")Category category){
 	   log.debug("Edit Category method starts");
 	   categoryDAO.saveOrUpdate(category);
 	   log.debug("Edit Category  ends");
-	   return "category";
+	   return "/AddCategory";
 	   
-   }
+   }*/
 }
 

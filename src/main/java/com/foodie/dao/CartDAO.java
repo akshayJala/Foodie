@@ -6,13 +6,11 @@ import com.foodie.model.Cart;
 import com.foodie.model.User;
 
 public interface CartDAO {
-	public List<Cart> list();
-	public List<Cart> list(String loggedInUserid);
-	public Cart get(String CartId);
-	public boolean save(Cart cart);
-	public boolean update(Cart cart);
-	public boolean saveorUpdate(Cart cart);
-	public boolean delete(String CartId);
-	public int TotalAmount(String loggedInUserid);
-	public Long getCount(String UserName);
+	
+	public Cart getCart(int id);
+	public void saveOrUpdate(Cart cart);
+	public void delete(int id);
+	public List<Cart> list() ;
+	//public int getTotalAmount(String id);
+
 }

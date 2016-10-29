@@ -8,122 +8,93 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.foodie.model.Cart;
 
+@SuppressWarnings("deprecation")
 @Repository("cartDAO")
-public class CartDAOImpl implements CartDAO{
+public class CartDAOImpl implements CartDAO {
 	
 	@Autowired
 	private Cart cart;
 	
 	@Autowired
 	private SessionFactory sessionFactory;
-	public CartDAOImpl(SessionFactory sessionFactory)
-	{
+	
+	public CartDAOImpl(SessionFactory sessionFactory){   //Constructor
 		this.sessionFactory=sessionFactory;
 	}
 	@Transactional
-	public boolean save(Cart cart){
-		try
-		{
-			sessionFactory.getCurrentSession().save(cart);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	@Transactional
-	public boolean update(Cart cart){
-		try
-		{
-			sessionFactory.getCurrentSession().update(cart);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	@Transactional
-	public boolean delete(String CartId){
-		try
-		{
-			sessionFactory.getCurrentSession().delete(get(CartId));
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	@Transactional
-	public boolean saveorUpdate(Cart cart) {
+	public void saveOrUpdate(Cart cart){            //save or update
 		sessionFactory.getCurrentSession().saveOrUpdate(cart);
-		return true;
+		System.out.println("connect to controller");
 	}
+	
+	@Transactional
+	public void delete(int id){
+		Cart cartToDelete = new Cart();
+		cartToDelete.setId(id);
+		sessionFactory.getCurrentSession().delete(cartToDelete);
+	
+	}
+	
+		/*cart.setUserID(id);
+		try {
+			sessionFactory.getCurrentSession().delete(cart);
+			
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return e.getMessage();
+			// TODO: handle exception
+		}*/
+		
 	
 	
 	@Transactional
-	public Cart get(String CartId){
-		//select * from Cart where id='id'
-		String hql="from Cart where id='"+CartId+"'";
+	public Cart getCart(int id){
+		String hql = "from Cart where userID=" + "'" + id + "'  and status = " + "N";
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
-		List<Cart> list=query.list();
-		if(list==null||list.isEmpty())
-			{
-			return null;
-			}
-		return list.get(0);//return the domain object//not true or false
+	
+	
+		@SuppressWarnings("unchecked")
+		List<Cart> listCart= (List<Cart>)query.getResultList();
+		
+		if(listCart!=null &&!(listCart.isEmpty()))
+		{
+			return listCart.get(0);
+		}
+		System.out.println("connect to controller");
+		return null;
+		
 	}
 	
 	@Transactional
 	public List<Cart> list() {
-	List<Cart> listCategory = (List<Cart>)sessionFactory.getCurrentSession()
-					.createCriteria(Cart.class)
-					.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		
+		@SuppressWarnings("unchecked")
+		List<Cart> listCart = (List<Cart>) sessionFactory
+				.getCurrentSession().createCriteria(Cart.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
-			return listCategory;
-		}
-	@Transactional
-	public List<Cart> list(String loggedInUserid) {
-		String hql = "from"+" Cart"+" where userId="+loggedInUserid+"and status='C'";
-		@SuppressWarnings("rawtypes")
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		List<Cart> list = (List<Cart>)query.list();
-		return list;
+		return listCart;
 	}
-@Transactional
-	public int TotalAmount(String CartId){
-		try{
-			String hql = "from Cart where user_id=" + "'" + CartId + "'";
-			Session s = sessionFactory.getCurrentSession();
-			Transaction tx = s.beginTransaction();
-			org.hibernate.Query query = s.createQuery(hql);
-			List<Cart> all = query.list();
-			//tx.commit();
-			int k=0;
-			for (Cart temp : all) {
-				k = k + temp.getTotal_price();
-			}		
-			return k;	
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return 0;
-		}
-				}
+	
+	@Transactional
+	public int getTotalAmount(String id){
+		String hql="select sum(price) from Cart where userID='"+id+"'";
+		//Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		//int sum=query.uniqueResult();
+		return 5677;
+	}
+	
 
-@Transactional
-public Long getCount(String username) {
-	String hql ="select count(*) from Cart where UserName = '" + username + "'";
-	Query query = sessionFactory.getCurrentSession().createQuery(hql);
-	Long count = (Long) query.uniqueResult();
-	return count;
-}
+	
 
 }
+

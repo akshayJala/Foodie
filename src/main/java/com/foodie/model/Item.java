@@ -1,6 +1,8 @@
 package com.foodie.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,35 +16,34 @@ import org.springframework.web.multipart.MultipartFile;
 @Table(name="Item")
 @Component
 public class Item {
-	
-	@Id
-	private String ItemId;
-	
-	private String ItemName;	
-	private int price;
-	private String description;
-	private String category_id;
-	private String supplier_id;
-	
 	@ManyToOne
 	@JoinColumn(name="category_id",updatable=false,insertable=false,nullable=false)
 	private Category category;
-	@ManyToOne
-	@JoinColumn(name="supplier_id",updatable=false,insertable=false,nullable=false)
-	private Supplier supplier;
+	
+	@Id
+	private String id;
+	
+	private String name;	
+	private int price;
+	private String description;
+	private String category_id;
+	
+	
+	
+	
 	@Transient
 	private MultipartFile image;
-	public String getItemId() {
-		return ItemId;
+	public String getId() {
+		return id;
 	}
-	public void setItemId(String itemId) {
-		ItemId = itemId;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getItemName() {
-		return ItemName;
+	public String getName() {
+		return name;
 	}
-	public void setItemName(String itemName) {
-		ItemName = itemName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getPrice() {
 		return price;
@@ -62,24 +63,14 @@ public class Item {
 	public void setCategory_id(String category_id) {
 		this.category_id = category_id;
 	}
-	public String getSupplier_id() {
-		return supplier_id;
-	}
-	public void setSupplier_id(String supplier_id) {
-		this.supplier_id = supplier_id;
-	}
+	
 	public Category getCategory() {
 		return category;
 	}
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	public Supplier getSupplier() {
-		return supplier;
-	}
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
-	}
+	
 	public MultipartFile getImage() {
 		return image;
 	}

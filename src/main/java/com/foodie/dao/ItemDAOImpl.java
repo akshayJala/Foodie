@@ -18,84 +18,63 @@ public class ItemDAOImpl implements ItemDAO{
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
 	public ItemDAOImpl(SessionFactory sessionFactory)
 	{
 		this.sessionFactory=sessionFactory;
+		
 	}
 	@Transactional
-	public boolean save(Item item){
-		try
-		{
-			sessionFactory.getCurrentSession().save(item);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	@Transactional
-	public boolean update(Item item){
-		try
-		{
-			sessionFactory.getCurrentSession().update(item);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	@Transactional
-	public boolean delete(String ItemId){
-		try
-		{
-			sessionFactory.getCurrentSession().delete(get(ItemId));
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	@Transactional
-	public boolean saveOrUpdate(Item item) {
+	public void saveOrUpdate(Item item)
+	{
 		sessionFactory.getCurrentSession().saveOrUpdate(item);
-		return true;
+	
+	}
+	@Transactional
+	public void delete(String id)
+	{
+		Item itemtodelete=new Item();
+		itemtodelete.setId(id);
+		sessionFactory.getCurrentSession().delete(itemtodelete);
+		
+	}
+	@Transactional
+	public Item getItem(String id) {
+		String hql = "from Item where id=" + "'"+ id +"'";
+		Query query= sessionFactory.getCurrentSession().createQuery(hql); 
+		List<Item> listItem = (List<Item>)query.list();
+		
+		if (listItem != null && !listItem.isEmpty()) {
+			return listItem.get(0);
+		}
+		return null;
 	}
 	
-		@Transactional
-	public Item get(String ItemId){
-		//select * from Category where ItemId='ItemId'
-		String hql="from Item where itemId='"+ItemId+"'";
-		Query query=sessionFactory.getCurrentSession().createQuery(hql);
-		List<Item> list=query.list();
-		if(list==null||list.isEmpty())
-			{
-			return null;
-			}
-		return list.get(0);
-	}
-		@Transactional
-		public List<Item> list() {
-			@SuppressWarnings("unchecked")
-			List<Item> Item = (List<Item>) sessionFactory.getCurrentSession()
-					.createCriteria(Item.class)
-					.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-			return Item;
-		}
-		
-	/*@Transactional
+	@Transactional
 	public List<Item> list() {
 		@SuppressWarnings("unchecked")
-		List<Item> listProduct = (List<Item>) sessionFactory.getCurrentSession()
+		List<Item> listItem = (List<Item>) 
+		          sessionFactory.getCurrentSession()
 				.createCriteria(Item.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-		return listProduct;
-	}*/
+		return listItem;
+	}
+	
+	@Transactional
+	public Item getByName(String name) {
+		String hql = "from Item where name=" + "'"+ name +"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		
+		@SuppressWarnings("unchecked")
+		List<Item> listItem = (List<Item>) query.list();
+		
+		if (listItem != null && !listItem.isEmpty()) {
+			return listItem.get(0);
+		}
+		
+		return null;
+	}
+	
 	
 }
 		

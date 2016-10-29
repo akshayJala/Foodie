@@ -23,12 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.foodie.dao.CartDAO;
 import com.foodie.dao.CategoryDAO;
 import com.foodie.dao.ItemDAO;
-import com.foodie.dao.SupplierDAO;
+
 import com.foodie.dao.UserDAO;
 import com.foodie.model.Cart;
 import com.foodie.model.Category;
 import com.foodie.model.Item;
-import com.foodie.model.Supplier;
+
 import com.foodie.model.User;
 
 @Controller
@@ -46,11 +46,7 @@ public class UserController {
 	Item item;
 	@Autowired
 	ItemDAO itemDAO;
-	@Autowired
-	Supplier supplier;
-	@Autowired
-	SupplierDAO supplierDAO;
-	@Autowired
+	
 	Cart cart;
 	@Autowired
 	CartDAO cartDAO;

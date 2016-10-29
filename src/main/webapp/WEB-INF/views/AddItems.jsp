@@ -96,16 +96,16 @@
 							<div class="cols-sm-4">
 								<div class="input-group">
 									
-									<form:input type="text" class="form-control" path="ItemName"  placeholder="Enter item Name"/>
+									<form:input type="text" class="form-control" path="name"  placeholder="Enter item Name"/>
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
+					  <div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">Item ID</label>
 							<div class="cols-sm-4">
 								<div class="input-group">
 									
-									<form:input type="text" class="form-control" path="ItemId"  placeholder="Enter item ID"/>
+									<form:input type="text" class="form-control" path="id"  placeholder="Enter item ID"/>
 								</div>
 							</div>
 						</div>
@@ -136,15 +136,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Supplier ID</label>
-							<div class="cols-sm-4">
-								<div class="input-group">
-									
-									<form:input type="text" class="form-control" path="Supplier_id"  placeholder="Enter supplier id"/>
-								</div>
-							</div>
-						</div>
+						
 						
 
 				

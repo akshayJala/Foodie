@@ -72,7 +72,8 @@
 
 		
 	<div class="text-center">
-	<h3>Welcome Admin!</h3>
+	<h3>Welcome ${user.userName}!</h3>
+	<p></p>
 	</div>
 	</div>
 	</div>
@@ -99,7 +100,7 @@
 						<td>${c.cartId}</td>
 						<td>${c.itemName}</td>
 						<td>${c.quantity}</td>
-					
+					<td>${c.price}</td>
 						<td>${c.total_price}</tr>	
 					</tr>
 				</c:forEach>

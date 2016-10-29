@@ -75,7 +75,7 @@
 
 		
 	<div class="text-center">
-	<h3>Welcome Admin!</h3>
+	<h3>Welcome ${user.userId}!</h3>
 	</div>
 	</div>
 	</div>
@@ -91,7 +91,7 @@
 					<th>Item Price</th>
 					<th>Description</th>
 					<th>Category</th>
-					<th>Supplier</th>
+					
 					
 					
 				
@@ -112,17 +112,20 @@
 				<c:forEach items="${itemList}" var="item">
 					<tr>
 						  <td style="width: 171px"><img
-							src="<c:url value="/resources/images/${item.itemId}.jpg"/>" style="width: 100px;height: 90px;"/></td>
-						<td>${item.itemId}</td>
-						<td>${item.itemName}</td>
+							src="<c:url value="/resources/images/item${item.id}.jpg"/>" style="width: 100px;height: 90px;"/></td>
+						<td>${item.id}</td>
+						<td>${item.name}</td>
 						<td>${item.price}</td>
 						<td style="width: 180px">${item.description}</td>
 						<td>${item.category_id}</td>
-					<td>${item.supplier_id}</td>
+					
 						
-					<td><a href="item/edit/${item.itemId}" class="btn btn-success" style="margin-left: 5px"> <span
+					<td>
+					 <a href="/Items/addToCart/${item.id}" class="btn btn-primary" style="margin-left: 5px"> <span
+								class="glyphicon glyphicon-shopping-cart"></span></a>
+					<a href="/AddItems" class="btn btn-success" style="margin-left: 5px"> <span
 									class="glyphicon glyphicon-edit"></span></a>
-								<a href="item/remove/${item.itemId}" class="btn btn-danger" style="margin-left: 5px"> <span
+								<a href="item/remove/${item.id}" class="btn btn-danger" style="margin-left: 5px"> <span
 									class="glyphicon glyphicon-trash"></span></a></td>	
 						
 							

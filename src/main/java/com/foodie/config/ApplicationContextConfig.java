@@ -20,14 +20,13 @@ import com.foodie.dao.CategoryDAO;
 import com.foodie.dao.CategoryDAOImpl;
 import com.foodie.dao.ItemDAO;
 import com.foodie.dao.ItemDAOImpl;
-import com.foodie.dao.SupplierDAO;
-import com.foodie.dao.SupplierDAOImpl;
+
 import com.foodie.dao.UserDAO;
 import com.foodie.dao.UserDAOImpl;
 import com.foodie.model.Cart;
 import com.foodie.model.Category;
 import com.foodie.model.Item;
-import com.foodie.model.Supplier;
+
 import com.foodie.model.User;
 @Configuration
 @ComponentScan("com.foodie")
@@ -48,6 +47,7 @@ public class ApplicationContextConfig {
 		Properties properties = new Properties();
 		properties.put("hibernate.show.sql", "true");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");		
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
 		return properties;
 
 	}
@@ -59,7 +59,7 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClasses(Category.class);
 		sessionBuilder.addAnnotatedClasses(Item.class);
 		sessionBuilder.addAnnotatedClasses(User.class);
-		sessionBuilder.addAnnotatedClasses(Supplier.class);
+		
 		sessionBuilder.addAnnotatedClasses(Cart.class);		
 		return sessionBuilder.buildSessionFactory();
 		
@@ -81,16 +81,12 @@ public class ApplicationContextConfig {
 	public ItemDAO getItemDao(SessionFactory sessionFactory) {
 		return new ItemDAOImpl(sessionFactory);
 	}
-	@Autowired
-	@Bean(name = "supplierDAO")
-	public SupplierDAO getSupplierDao(SessionFactory sessionFactory) {
-		return new SupplierDAOImpl(sessionFactory);
-	}
-	@Autowired
+
+	/*@Autowired
 	@Bean(name = "cartDAO")
 	public CartDAO getCartDao(SessionFactory sessionFactory) {
 		return new CartDAOImpl(sessionFactory);
-	}
+	}*/
 	@Autowired
 	@Bean(name = "userDAO")
 	public UserDAO getUserDao(SessionFactory sessionFactory) {

@@ -79,7 +79,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 	
 	
-	private Object getUser() {
+	public Object getUser() {
 		
 		return user;
 	}
@@ -124,8 +124,8 @@ log.debug("method ends : list");
 			Criteria cr=session.createCriteria(User.class);
 			cr.add(Restrictions.eq("UserId",u.getUserId()));
 			cr.add(Restrictions.eq("pwd",u.getPwd()));
-			User usr=(User)cr.uniqueResult();
-			return usr;
+			user=(User)cr.uniqueResult();
+			return user;
 	}
 	
 	@Transactional

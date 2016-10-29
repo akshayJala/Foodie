@@ -18,14 +18,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.foodie.dao.CategoryDAO;
 import com.foodie.dao.ItemDAO;
-import com.foodie.dao.SupplierDAO;
+
 import com.foodie.dao.UserDAO;
 
 import com.foodie.dao.CartDAO;
 import com.foodie.model.Cart;
 import com.foodie.model.Category;
 import com.foodie.model.Item;
-import com.foodie.model.Supplier;
+
 import com.foodie.model.User;
 
 @Controller
@@ -43,10 +43,7 @@ public class HomeController {
 	Item item;
 	@Autowired
 	ItemDAO itemDAO;
-	@Autowired
-	Supplier supplier;
-	@Autowired
-	SupplierDAO supplierDAO;
+	
 	@RequestMapping("/Home")
 	public ModelAndView Home(){
 		
@@ -60,8 +57,7 @@ public class HomeController {
 		session.setAttribute("category", category);
 		session.setAttribute("item", item);
 		session.setAttribute("categoryList", categoryDAO.list());
-		session.setAttribute("supplier", supplier);
-		session.setAttribute("supplierList", supplierDAO.list());
+		
 		log.debug("onLoad method ends");
 		return mv;
 	}
@@ -78,12 +74,7 @@ public class HomeController {
 		ModelAndView mv=new ModelAndView("/Items");
 		return mv;
 	}
-	@RequestMapping("/SupplierList")
-	public ModelAndView Suppliers(){
-		
-		ModelAndView mv=new ModelAndView("/SupplierList");
-		return mv;
-	}
+	
 	@RequestMapping("/CategoryList")
 	public ModelAndView Categories(){
 		
@@ -172,12 +163,7 @@ public class HomeController {
 	}
 
 	
-	@RequestMapping(value="/AddSupplier",method=RequestMethod.GET)
-	public ModelAndView AddSupplier(){
-		
-		ModelAndView mv=new ModelAndView("/AddSupplier","command",new Supplier());
-		return mv;
-	}
+	
 	
 	
 }

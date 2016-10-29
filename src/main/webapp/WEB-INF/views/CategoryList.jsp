@@ -98,7 +98,10 @@
 						<td>${category.categoryId}</td>
 						<td>${category.categoryName}</td>
 						<td style="width: 180px">${category.description}</td>
-							
+							<td><a href="/AddCategory" class="btn btn-success" style="margin-left: 5px"> <span
+									class="glyphicon glyphicon-edit"></span></a>
+								<a href="category/remove/${category.categoryId}" class="btn btn-danger" style="margin-left: 5px"> <span
+									class="glyphicon glyphicon-trash"></span></a></td>	
 					</tr>
 				</c:forEach>
 			</tbody>
